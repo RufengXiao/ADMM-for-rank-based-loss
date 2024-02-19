@@ -156,19 +156,19 @@ admm_w, admm_time_array, admm_train_losses, admm_test_losses=admm_solver.final_r
 admm_test_acc = calculate_accuracy(admm_w.reshape(-1, 1),X_test_other, y_test, threshold=0.5,loss=loss)
 
 sgd_w, sgd_train_losses, sgd_test_losses, sgd_time_array = SGDmethod(X_train_other,y_train,weight_function,loss,
-                l2_reg=None,l1_reg=None,max_iter = 2000,batch_size=64, lr = 0.01,
+                l2_reg=l2_reg,l1_reg=l1_reg,max_iter = 2000,batch_size=64, lr = 0.01,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
                 verbose=verbose,args=args)
 sgd_test_acc = calculate_accuracy(sgd_w.reshape(-1, 1),X_test_other, y_test, threshold=0.5,loss=loss)
 
 lsvrg_nu_w, lsvrg_nu_train_losses, lsvrg_nu_test_losses, lsvrg_nu_time_array = LSVRGmethod(X_train_other,y_train,weight_function,loss,
-                l2_reg=None,l1_reg=None,max_iter = 200, lr = 0.0001,
+                l2_reg=l2_reg,l1_reg=l1_reg,max_iter = 200, lr = 0.0001,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
                 uniform=None,verbose=verbose,args=args)
 lsvrg_nu_acc = calculate_accuracy(lsvrg_nu_w.reshape(-1, 1),X_test_other, y_test, threshold=0.5,loss=loss)
 
 lsvrg_u_w, lsvrg_u_train_losses, lsvrg_u_test_losses, lsvrg_u_time_array = LSVRGmethod(X_train_other,y_train,weight_function,loss,
-                l2_reg=None,l1_reg=None,max_iter = 200, lr = 0.0001,
+                l2_reg=l2_reg,l1_reg=l1_reg,max_iter = 200, lr = 0.0001,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
                 uniform=True,verbose=verbose,args=args)
 lsvrg_u_acc = calculate_accuracy(lsvrg_u_w.reshape(-1, 1),X_test_other, y_test, threshold=0.5,loss=loss)
