@@ -39,6 +39,9 @@ admm_w, admm_time_array, admm_train_losses, admm_test_losses=admm_solver.final_r
 admm_test_acc = calculate_accuracy(admm_w.reshape(-1, 1),X_test, y_test, threshold=0.5,loss=loss)
 admm_SPD, admm_DI, admm_EOD, admm_AOD, admm_TI ,admm_FNRD = calculate_statistics(admm_w.reshape(-1,1), X_test, y_test, group_test, threshold=0.5)
 
+l2_reg = l2_reg*X_train.shape[0] 
+l1_reg = None 
+
 sgd_w, sgd_train_losses, sgd_test_losses, sgd_time_array = SGDmethod(X_train,y_train,weight_function,loss,
                 l2_reg=l2_reg,l1_reg=l1_reg,lossB=B,max_iter = 2000,batch_size=64, lr = 0.0001,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
