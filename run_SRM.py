@@ -49,6 +49,9 @@ if l1_reg is not None:
     sadmm_w, sadmm_time_array, sadmm_train_losses, sadmm_test_losses=sadmm_solver.final_res()
     sadmm_test_acc = calculate_accuracy(admm_w.reshape(-1, 1),X_test, y_test, threshold=0.5,loss=loss)
 
+l2_reg = l2_reg*X_train.shape[0] 
+l1_reg = None 
+
 sgd_w, sgd_train_losses, sgd_test_losses, sgd_time_array = SGDmethod(X_train,y_train,weight_function,loss,
                 l2_reg=l2_reg,l1_reg=l1_reg,max_iter = 1000,batch_size=64, lr = 1e-5,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
