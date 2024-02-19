@@ -155,6 +155,9 @@ admm_solver.main_loop(verbose=verbose) # verbose=True for printing the loss and 
 admm_w, admm_time_array, admm_train_losses, admm_test_losses=admm_solver.final_res()
 admm_test_acc = calculate_accuracy(admm_w.reshape(-1, 1),X_test_other, y_test, threshold=0.5,loss=loss)
 
+l2_reg = l2_reg*X_train.shape[0] 
+l1_reg = None 
+
 sgd_w, sgd_train_losses, sgd_test_losses, sgd_time_array = SGDmethod(X_train_other,y_train,weight_function,loss,
                 l2_reg=l2_reg,l1_reg=l1_reg,max_iter = 2000,batch_size=64, lr = 0.01,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
