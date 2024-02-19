@@ -1,6 +1,7 @@
 import numpy as np
 import time
 from sklearn import metrics
+import torch
 import os
 pwd = os.path.abspath(os.path.dirname(__file__))
 
