@@ -40,21 +40,21 @@ admm_test_acc = calculate_accuracy(admm_w.reshape(-1, 1),X_test, y_test, thresho
 admm_SPD, admm_DI, admm_EOD, admm_AOD, admm_TI ,admm_FNRD = calculate_statistics(admm_w.reshape(-1,1), X_test, y_test, group_test, threshold=0.5)
 
 sgd_w, sgd_train_losses, sgd_test_losses, sgd_time_array = SGDmethod(X_train,y_train,weight_function,loss,
-                l2_reg=None,l1_reg=None,lossB=B,max_iter = 2000,batch_size=64, lr = 0.0001,
+                l2_reg=l2_reg,l1_reg=l1_reg,lossB=B,max_iter = 2000,batch_size=64, lr = 0.0001,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
                 verbose=verbose,args=args)
 sgd_test_acc = calculate_accuracy(sgd_w.reshape(-1, 1),X_test, y_test, threshold=0.5,loss=loss)
 sgd_SPD, sgd_DI, sgd_EOD, sgd_AOD, sgd_TI ,sgd_FNRD = calculate_statistics(sgd_w.reshape(-1,1), X_test, y_test, group_test, threshold=0.5)
 
 lsvrg_nu_w, lsvrg_nu_train_losses, lsvrg_nu_test_losses, lsvrg_nu_time_array = LSVRGmethod(X_train,y_train,weight_function,loss,
-                l2_reg=None,l1_reg=None,lossB=B,max_iter = 200, lr = 0.0001,
+                l2_reg=l2_reg,l1_reg=l1_reg,lossB=B,max_iter = 200, lr = 0.0001,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
                 uniform=None,verbose=verbose,args=args)
 lsvrg_nu_acc = calculate_accuracy(lsvrg_nu_w.reshape(-1, 1),X_test, y_test, threshold=0.5,loss=loss)
 lsvrg_nu_SPD, lsvrg_nu_DI, lsvrg_nu_EOD, lsvrg_nu_AOD, lsvrg_nu_TI ,lsvrg_nu_FNRD = calculate_statistics(lsvrg_nu_w.reshape(-1,1), X_test, y_test, group_test, threshold=0.5)
 
 lsvrg_u_w, lsvrg_u_train_losses, lsvrg_u_test_losses, lsvrg_u_time_array = LSVRGmethod(X_train,y_train,weight_function,loss,
-                l2_reg=None,l1_reg=None,lossB=B,max_iter = 200, lr = 0.0001,
+                l2_reg=l2_reg,l1_reg=l1_reg,lossB=B,max_iter = 200, lr = 0.0001,
                 train_loss=admm_solver.objective.get_arrogate_loss, test_loss=admm_solver.test_objective.get_arrogate_loss,
                 uniform=True,verbose=verbose,args=args)
 lsvrg_u_acc = calculate_accuracy(lsvrg_u_w.reshape(-1, 1),X_test, y_test, threshold=0.5,loss=loss)
