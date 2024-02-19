@@ -10,7 +10,7 @@ def LSVRGmethod(X,y,weight_function,loss,l2_reg=None,l1_reg=None,lossB=None,
                 max_iter = 20, lr = 0.01,train_loss=None, test_loss=None, uniform=None, verbose=True, args=None):
     y = y.copy()
     X = torch.tensor(X).double()
-    if loss == 'logistic':
+    if loss == 'logistic' or "binary_cross_entropy":
         y[y == -1] = 0
     y = torch.tensor(y.reshape(-1)).double()
 
