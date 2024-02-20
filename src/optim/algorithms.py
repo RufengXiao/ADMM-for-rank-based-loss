@@ -136,9 +136,9 @@ class Optimizer:
                 print('loss=', self.objective.get_arrogate_loss(torch.from_numpy(self.w).double()))
                 
         # ALM penalty update
-        if self.loss == 'ehrm':
+        if self.loss == 'ehrm' or self.loss == 'aorr':
             self.rho = np.min((self.rho * 1.2, 17 * self.num_feature))
-        elif self.loss == 'aorr' or self.loss == 'aorr_dc':
+        elif self.loss == 'aorr_dc':
             if i >= 7 and i % 3 == 0:
                 self.rho = np.min((self.rho * 5, 17 * self.num_feature))
         else:
