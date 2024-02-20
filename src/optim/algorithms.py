@@ -8,6 +8,7 @@ Created on Fri Aug 18 11:40:54 2023
 import numpy as np
 from src.optim.objective import rankbasedObjective
 from src.util.pav import PAV_solver
+from src.util.PAV_cpt import PAV_solver_CPT
 from src.util.w_LBFGS import w_solver
 from src.util.fast_lasso import FISTA
 from sklearn.linear_model import Lasso
@@ -69,6 +70,10 @@ class Optimizer:
         self.z_maxiter = self.num_row
         self.store = False
 
+        self.weight_function = weight_function
+        self.sigma_a = self.objective.alphas.numpy().reshape(-1)
+        self.sigma_b = self.objective.betas.numpy().reshape(-1)
+
     def start_store(self,X,y,weight_function="erm", loss="binary_cross_entropy",
                  B=None,l2_reg=None,l1_reg=None, n_class=None, args=None):
         # X, y both are test set.
@@ -87,10 +92,14 @@ class Optimizer:
         sort_index = np.argsort(m)
         sorted_m = np.sort(m)
         
-        solver = PAV_solver(self.objective.alphas.numpy().reshape(-1),sorted_m, 
-                            self.rho, self.loss, self.B,self.objective.betas.numpy().reshape(-1))
-        
-        pav_res = solver.get_opt(maxiter=self.z_maxiter)
+        if self.weight_function == 'ehrm':
+            solver = PAV_solver_CPT(self.sigma_a, self.sigma_b, self.B, sorted_m, self.rho)
+            pav_res, _ = solver.get_opt()
+        else:
+            solver = PAV_solver(self.objective.alphas.numpy().reshape(-1),sorted_m, 
+                                self.rho, self.loss, self.B,self.objective.betas.numpy().reshape(-1))
+            pav_res, _= solver.get_opt(maxiter=self.z_maxiter)
+            
         new_z = np.zeros(shape=self.z.shape)
         new_z[sort_index] = pav_res.reshape(self.z.shape)
         
