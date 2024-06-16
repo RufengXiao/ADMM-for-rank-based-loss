@@ -33,6 +33,20 @@ If you need to draw graphs and store data, change `need_log = False` in each `ru
 The results will be saved in folders `figure` and `table`.
 
 ### Citation
-If you found the provided code useful, please cite our work.
+If you want to reference our paper in your research, please consider citing us by using the following BibTeX:
+
+```bib
+@inproceedings{NEURIPS2023_a10946e1,
+ author = {Xiao, Rufeng and Ge, Yuze and Jiang, Rujun and Yan, Yifan},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {A. Oh and T. Naumann and A. Globerson and K. Saenko and M. Hardt and S. Levine},
+ pages = {51302--51326},
+ publisher = {Curran Associates, Inc.},
+ title = {A Unified Framework for Rank-based Loss Minimization},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2023/file/a10946e1f46e1ffc0daf37cb2abfdcad-Paper-Conference.pdf},
+ volume = {36},
+ year = {2023}
+}
+```
 
 If you have any questions, please contact us.
